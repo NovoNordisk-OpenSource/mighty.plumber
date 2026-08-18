@@ -53,21 +53,10 @@ download_components <- function(repo, dest, overwrite = FALSE) {
   spec <- remotes::parse_repo_spec(repo)
 
   tarfile <- withr::local_tempfile(fileext = ".tar.gz")
-
-  endpoint <- "GET /repos/{owner}/{repo}/tarball"
-  args <- list(owner = spec$username, repo = spec$repo, .destfile = tarfile)
-
-  if (nzchar(spec$ref)) {
-    endpoint <- paste0(endpoint, "/{ref}")
-    args$ref <- spec$ref
-  }
-
-  do.call(gh::gh, c(list(endpoint = endpoint), args))
-
   exdir <- withr::local_tempdir()
-  utils::untar(tarfile, exdir = exdir)
 
-  root <- list.dirs(exdir, recursive = FALSE)[[1]]
+  root <- download_tar(spec, tarfile) |>
+    extract_tar(exdir)
 
   if (nzchar(spec$subdir)) {
     root <- file.path(root, spec$subdir)
