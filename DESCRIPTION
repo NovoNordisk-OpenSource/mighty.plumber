@@ -1,6 +1,6 @@
 Package: mighty.plumber
 Title: Setup 'plumber' API Serving 'mighty' Components
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: c(
     person("Aksel", "Thomsen", , "oath@novonordisk.com", role = c("aut", "cre")),
     person("Novo Nordisk A/S", role = "cph")
