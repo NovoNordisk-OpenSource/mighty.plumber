@@ -30,7 +30,10 @@
 #' @returns `dest`, invisibly.
 #' @examples
 #' dest <- withr::local_tempdir()
-#' download_components("NovoNordisk-OpenSource/mighty.standards/components", dest)
+#' download_components(
+#'   repo = "NovoNordisk-OpenSource/mighty.standards/components",
+#'   dest = dest
+#' )
 #' mighty.component::list_components(dest)
 #'
 #' @export
