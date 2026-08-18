@@ -23,8 +23,9 @@
 #'   `owner/repo/subdir`, or `owner/repo@ref`. When a subdir is given, only
 #'   that folder is searched.
 #' @param dest `character(1)` directory to write component files into.
-#'   Created if it does not exist. If it does exist, its contents are deleted
-#'   before the components are written.
+#'   Created if it does not exist. Any existing `.R` and `.mustache` files are
+#'   removed first, so components deleted upstream do not linger. Other files
+#'   are left untouched.
 #' @param overwrite `logical(1)` allow writing to a non-empty `dest`.
 #'   Errors if `FALSE` and `dest` is not empty.
 #' @returns `dest`, invisibly.
@@ -42,7 +43,10 @@ download_components <- function(repo, dest, overwrite = FALSE) {
   rlang::check_string(dest)
   rlang::check_bool(overwrite)
 
-  if (!overwrite && dir.exists(dest) && length(list.files(dest)) > 0) {
+  not_empty <- dir.exists(dest) &&
+    length(list.files(dest, all.files = TRUE, no.. = TRUE)) > 0
+
+  if (!overwrite && not_empty) {
     cli::cli_abort("Directory {.file {dest}} already exists and is not empty")
   }
 
@@ -87,8 +91,8 @@ download_components <- function(repo, dest, overwrite = FALSE) {
   }
 
   if (dir.exists(dest)) {
-    list.files(path = dest, full.names = TRUE) |>
-      file.remove()
+    list.files(path = dest, pattern = "\\.(R|mustache)$", full.names = TRUE) |>
+      unlink(recursive = TRUE)
   } else {
     dir.create(path = dest, recursive = TRUE)
   }

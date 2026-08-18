@@ -12,8 +12,9 @@ download_components(repo, dest, overwrite = FALSE)
 that folder is searched.}
 
 \item{dest}{\code{character(1)} directory to write component files into.
-Created if it does not exist. If it does exist, its contents are deleted
-before the components are written.}
+Created if it does not exist. Any existing \code{.R} and \code{.mustache} files are
+removed first, so components deleted upstream do not linger. Other files
+are left untouched.}
 
 \item{overwrite}{\code{logical(1)} allow writing to a non-empty \code{dest}.
 Errors if \code{FALSE} and \code{dest} is not empty.}
