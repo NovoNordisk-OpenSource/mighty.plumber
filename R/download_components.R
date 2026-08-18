@@ -38,7 +38,6 @@ download_components <- function(repo, dest, overwrite = FALSE) {
   rlang::check_string(repo)
   rlang::check_string(dest)
   rlang::check_bool(overwrite)
-  rlang::check_installed(c("gh", "remotes"))
 
   if (!overwrite && dir.exists(dest) && length(list.files(dest)) > 0) {
     cli::cli_abort("Directory {.file {dest}} already exists and is not empty")

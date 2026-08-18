@@ -15,7 +15,12 @@ BugReports:
 Depends:
     R (>= 4.1)
 Imports: 
-    mighty.component (>= 0.1.0.9003)
+    cli,
+    gh,
+    mighty.component (>= 0.1.0.9003),
+    remotes,
+    rlang,
+    withr
 Suggests:
     testthat (>= 3.0.0)
 Remotes: 
