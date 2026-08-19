@@ -4,13 +4,14 @@
 \alias{api_component}
 \title{Serve mighty components from a directory}
 \usage{
-api_component(api, path)
+api_component(api, path, folder)
 }
 \arguments{
 \item{api}{a \code{plumber2} api object to add the endpoint to.}
 
-\item{path}{\code{character(1)} directory holding the components. Doubles as
-the URL path the endpoint is served from.}
+\item{path}{\code{character(1)} URL path the endpoint is served from.}
+
+\item{folder}{\code{character(1)} directory holding the components.}
 }
 \value{
 The \code{api} object, allowing for chaining with the pipe.

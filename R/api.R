@@ -10,38 +10,38 @@
 #' Call once per component directory to serve each from its own endpoints.
 #'
 #' @param api a `plumber2` api object to add the endpoint to.
-#' @param path `character(1)` directory holding the components. Doubles as
-#' the URL path the endpoint is served from.
+#' @param path `character(1)` URL path the endpoint is served from.
+#' @param folder `character(1)` directory holding the components.
 #' @returns The `api` object, allowing for chaining with the pipe.
 #' @seealso [mighty.component::list_components()],
 #' [mighty.component::get_component()]
 #' @export
-api_component <- function(api, path) {
+api_component <- function(api, path, folder) {
   api |>
-    api_list_component(path = path) |>
-    api_get_component(path = path)
+    api_list_component(path = path, folder = folder) |>
+    api_get_component(path = path, folder = folder)
 }
 
 #' @noRd
-api_list_component <- function(api, path) {
+api_list_component <- function(api, path, folder) {
   plumber2::api_get(
     api = api,
     path = path,
     handler = \() {
-      mighty.component::list_components(path = path)
+      mighty.component::list_components(path = folder)
     }
   )
 }
 
 #' @noRd
-api_get_component <- function(api, path) {
+api_get_component <- function(api, path, folder) {
   plumber2::api_get(
     api = api,
     path = paste0(path, "/<id:string>"),
     handler = \(id) {
       get_component_template(
         component = id,
-        repos = path
+        repos = folder
       )
     }
   )
