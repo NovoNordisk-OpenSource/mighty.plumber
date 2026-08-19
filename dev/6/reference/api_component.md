@@ -13,7 +13,7 @@ Call once per component directory to serve each from its own endpoints.
 ## Usage
 
 ``` r
-api_component(api, path)
+api_component(api, path, folder)
 ```
 
 ## Arguments
@@ -24,8 +24,11 @@ api_component(api, path)
 
 - path:
 
-  `character(1)` directory holding the components. Doubles as the URL
-  path the endpoint is served from.
+  `character(1)` URL path the endpoint is served from.
+
+- folder:
+
+  `character(1)` directory holding the components.
 
 ## Value
 
