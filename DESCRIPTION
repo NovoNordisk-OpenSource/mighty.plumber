@@ -23,6 +23,7 @@ Imports:
     rlang,
     withr
 Suggests:
+    fiery,
     testthat (>= 3.0.0)
 Remotes: 
     novonordisk-opensource/mighty.component
