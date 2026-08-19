@@ -16,12 +16,15 @@ the URL path the endpoint is served from.}
 The \code{api} object, allowing for chaining with the pipe.
 }
 \description{
-Adds a \code{GET} endpoint at \code{path} serving the components found in the
-directory of the same name. Without an \code{id} query parameter the endpoint
-lists the available component IDs. With one it returns that component's
-template, or \code{404} if no such component exists.
+Adds two \code{GET} endpoints serving the components found in the directory
+\code{path}:
+\itemize{
+\item \code{path} lists the available component IDs.
+\item \verb{path/<id>} returns that component's template, or \code{404} if no such
+component exists.
+}
 
-Call once per component directory to serve each from its own endpoint.
+Call once per component directory to serve each from its own endpoints.
 }
 \seealso{
 \code{\link[mighty.component:list_components]{mighty.component::list_components()}},

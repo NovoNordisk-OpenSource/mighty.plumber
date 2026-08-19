@@ -13,23 +13,23 @@ test_that("api_component lists and retrieves components", {
   ids <- mighty.component::list_components(path = "standards/v1")
   expect_gt(length(ids), 0)
 
-  # No `id` lists the components in the path
+  # The base path lists the components in the directory
   res <- api$test_request(
     fiery::fake_request("http://example.com/standards/v1")
   )
   expect_equal(res$status, 200L)
 
-  # An `id` returns that component's template
+  # A subpath returns that component's template
   res <- api$test_request(
     fiery::fake_request(
-      paste0("http://example.com/standards/v1?id=", ids[[1]])
+      paste0("http://example.com/standards/v1/", ids[[1]])
     )
   )
   expect_equal(res$status, 200L)
 
-  # An unknown `id` is a 404, not a 500
+  # An unknown component is a 404, not a 500
   res <- api$test_request(
-    fiery::fake_request("http://example.com/standards/v1?id=no_such_component")
+    fiery::fake_request("http://example.com/standards/v1/no_such_component")
   )
   expect_equal(res$status, 404L)
 })
