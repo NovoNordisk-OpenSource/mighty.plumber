@@ -18,24 +18,48 @@
 #' @export
 api_component <- function(api, path) {
   api |>
-    plumber2::api_get(
-      path = path,
-      handler = \() mighty.component::list_components(path = path)
-    ) |>
-    plumber2::api_get(
-      path = paste0(path, "/<id:string>"),
-      handler = \(id) {
-        tryCatch(
-          expr = mighty.component::get_component(
-            component = id,
-            repos = path
-          )$template,
-          error = \(e) {
-            plumber2::abort_not_found(
-              detail = paste0("Unknown component: ", id)
-            )
-          }
-        )
-      }
-    )
+    api_list_component(path = path) |>
+    api_get_component(path = path)
+}
+
+#' @noRd
+api_list_component <- function(api, path) {
+  plumber2::api_get(
+    api = api,
+    path = path,
+    handler = \() {
+      mighty.component::list_components(path = path)
+    }
+  )
+}
+
+#' @noRd
+api_get_component <- function(api, path) {
+  plumber2::api_get(
+    api = api,
+    path = paste0(path, "/<id:string>"),
+    handler = \(id) {
+      get_component_template(
+        component = id,
+        repos = path
+      )
+    }
+  )
+}
+
+#' @noRd
+get_component_template <- function(component, repos) {
+  component <- tryCatch(
+    expr = mighty.component::get_component(
+      component = component,
+      repos = repos
+    ),
+    error = \(e) {
+      plumber2::abort_not_found(
+        detail = e$message
+      )
+    }
+  )
+
+  component$template
 }
