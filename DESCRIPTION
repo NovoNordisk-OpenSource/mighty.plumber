@@ -1,6 +1,6 @@
 Package: mighty.plumber
 Title: Setup 'plumber' API Serving 'mighty' Components
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: c(
     person("Aksel", "Thomsen", , "oath@novonordisk.com", role = c("aut", "cre")),
     person("Novo Nordisk A/S", role = "cph")
@@ -17,11 +17,12 @@ Depends:
 Imports:
     cli,
     gh,
+    mighty.component,
+    plumber2,
     remotes,
     rlang,
     withr
 Suggests:
-    mighty.component (>= 0.1.0.9003),
     testthat (>= 3.0.0)
 Remotes: 
     novonordisk-opensource/mighty.component
