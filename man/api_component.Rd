@@ -2,10 +2,28 @@
 % Please edit documentation in R/api.R
 \name{api_component}
 \alias{api_component}
-\title{Get component template}
+\title{Serve mighty components from a directory}
 \usage{
 api_component(api, path)
 }
+\arguments{
+\item{api}{a \code{plumber2} api object to add the endpoint to.}
+
+\item{path}{\code{character(1)} directory holding the components. Doubles as
+the URL path the endpoint is served from.}
+}
+\value{
+The \code{api} object, allowing for chaining with the pipe.
+}
 \description{
-Get component template
+Adds a \code{GET} endpoint at \code{path} serving the components found in the
+directory of the same name. Without an \code{id} query parameter the endpoint
+lists the available component IDs. With one it returns that component's
+template, or \code{404} if no such component exists.
+
+Call once per component directory to serve each from its own endpoint.
+}
+\seealso{
+\code{\link[mighty.component:list_components]{mighty.component::list_components()}},
+\code{\link[mighty.component:get_component]{mighty.component::get_component()}}
 }
