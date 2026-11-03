@@ -57,5 +57,7 @@ download_components(
   dest = dest
 )
 mighty.component::list_components(dest)
-#> [1] "dummy"
+#> [1] "mighty_col_echo"      "mighty_col_mutate"    "mighty_col_rename"   
+#> [4] "mighty_filter_domain" "mighty_init_domain"   "mighty_read_data"    
+#> [7] "mighty_write_data"   
 ```
