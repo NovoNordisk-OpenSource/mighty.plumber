@@ -17,11 +17,13 @@ Depends:
 Imports:
     cli,
     gh,
+    mighty.component,
+    plumber2,
     remotes,
     rlang,
     withr
 Suggests:
-    mighty.component (>= 0.1.0.9003),
+    fiery,
     testthat (>= 3.0.0)
 Remotes: 
     novonordisk-opensource/mighty.component
